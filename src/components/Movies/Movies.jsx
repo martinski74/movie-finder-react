@@ -1,5 +1,4 @@
 import { Fragment, useEffect, useState } from "react";
-import { findMovie } from "../../movie-servises";
 import Movie from "../Movie/Movie";
 const apiKey = "f9e6afddb568c3eac19893218b578cea";
 const path = "https://api.themoviedb.org/3/";
@@ -7,18 +6,17 @@ const popular = "discover/movie?sort_by=popularity.desc";
 const kids =
   "discover/movie?certification_country=US&certification.lte=G&sort_by=popularity.desc";
 const drama = "discover/movie?with_genres=18&primary_release_year=2014";
-const movie = "movie/";
+
 const theathers =
   "discover/movie?primary_release_date.gte=2014-09-15&primary_release_date.lte=2014-10-22";
 const authentication = "&api_key=";
-const movieAuth = "?api_key=";
 
 export const Movies = () => {
   const [popularMovie, setPopular] = useState(null);
   const [theartherMovie, setTheather] = useState(null);
   const [kidsMovie, setKids] = useState(null);
   const [dramaMovie, setDrama] = useState(null);
-  const [singleMovie, setMovie] = useState([]);
+
   const [searchedMovie, setsearchedMovie] = useState(null);
   const [isSearched, setIsSearchede] = useState(true);
   const [inputText, setInputText] = useState("");
@@ -28,7 +26,6 @@ export const Movies = () => {
     getTheather();
     getKids();
     getDrama();
-    // getMovie();
   }, []);
 
   const getPopular = async () => {
