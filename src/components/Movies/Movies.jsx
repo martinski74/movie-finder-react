@@ -73,20 +73,21 @@ export const Movies = () => {
 
   const findMovie = (e) => {
     e.preventDefault();
-    console.log(inputText);
-    fetch(
-      `https://api.themoviedb.org/3/search/movie?query=${inputText}&api_key=${apiKey}`
-    )
-      .then((res) => res.json())
-      .then(
-        (data) => {
-          setsearchedMovie(data);
-          setIsSearchede(true);
-          setInputText("");
-          console.log(data.results);
-        },
-        (err) => console.log(err)
-      );
+    if (inputText) {
+      fetch(
+        `https://api.themoviedb.org/3/search/movie?query=${inputText}&api_key=${apiKey}`
+      )
+        .then((res) => res.json())
+        .then(
+          (data) => {
+            setsearchedMovie(data);
+            setIsSearchede(true);
+            setInputText("");
+            console.log(data.results);
+          },
+          (err) => console.log(err)
+        );
+    }
   };
 
   const handleChange = (event) => {
