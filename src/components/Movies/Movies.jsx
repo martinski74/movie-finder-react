@@ -1,4 +1,5 @@
 import { Fragment, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import Movie from "../Movie/Movie";
 const apiKey = "f9e6afddb568c3eac19893218b578cea";
 const path = "https://api.themoviedb.org/3/";
@@ -6,7 +7,6 @@ const popular = "discover/movie?sort_by=popularity.desc";
 const kids =
   "discover/movie?certification_country=US&certification.lte=G&sort_by=popularity.desc";
 const drama = "discover/movie?with_genres=18&primary_release_year=2014";
-
 const theathers =
   "discover/movie?primary_release_date.gte=2014-09-15&primary_release_date.lte=2014-10-22";
 const authentication = "&api_key=";
@@ -96,9 +96,9 @@ export const Movies = () => {
   return (
     <Fragment>
       <nav className="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-        <a className="navbar-brand" href="#">
+        <Link className="navbar-brand" to={"/"}>
           Movie Finder
-        </a>
+        </Link>
       </nav>
 
       <div className="jumbotron">
