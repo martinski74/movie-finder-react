@@ -6,7 +6,7 @@ import * as Constants from "./../constants.js";
 
 export const Movies = () => {
   const [searchedMovie, setsearchedMovie] = useState(null);
-  const [isSearched, setIsSearchede] = useState(true);
+  const [isSearched, setIsSearchede] = useState(false);
   const [inputText, setInputText] = useState("");
 
   const [popularMovie] = useFetch(
