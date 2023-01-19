@@ -2,16 +2,7 @@ import { Fragment, useState } from "react";
 import { Link } from "react-router-dom";
 import Movie from "../Movie/Movie";
 import useFetch from "../../fetch-hook";
-
-const apiKey = "f9e6afddb568c3eac19893218b578cea";
-const path = "https://api.themoviedb.org/3/";
-const popular = "discover/movie?sort_by=popularity.desc";
-const kids =
-  "discover/movie?certification_country=US&certification.lte=G&sort_by=popularity.desc";
-const drama = "discover/movie?with_genres=18&primary_release_year=2014";
-const theathers =
-  "discover/movie?primary_release_date.gte=2014-09-15&primary_release_date.lte=2014-10-22";
-const authentication = "&api_key=";
+import * as Constants from "./../constants.js";
 
 export const Movies = () => {
   const [searchedMovie, setsearchedMovie] = useState(null);
@@ -19,19 +10,23 @@ export const Movies = () => {
   const [inputText, setInputText] = useState("");
 
   const [popularMovie] = useFetch(
-    `${path}${popular}${authentication}${apiKey}`
+    `${Constants.PATH}${Constants.POPULAR}${Constants.AUTENTICATION}${Constants.API_KEY}`
   );
   const [theartherMovie] = useFetch(
-    `${path}${theathers}${authentication}${apiKey}`
+    `${Constants.PATH}${Constants.THEATHER}${Constants.AUTENTICATION}${Constants.API_KEY}`
   );
-  const [kidsMovie] = useFetch(`${path}${kids}${authentication}${apiKey}`);
-  const [dramaMovie] = useFetch(`${path}${drama}${authentication}${apiKey}`);
+  const [kidsMovie] = useFetch(
+    `${Constants.PATH}${Constants.KIDS}${Constants.AUTENTICATION}${Constants.API_KEY}`
+  );
+  const [dramaMovie] = useFetch(
+    `${Constants.PATH}${Constants.DRAMA}${Constants.AUTENTICATION}${Constants.API_KEY}`
+  );
 
   const findMovie = (e) => {
     e.preventDefault();
     if (inputText) {
       fetch(
-        `https://api.themoviedb.org/3/search/movie?query=${inputText}&api_key=${apiKey}`
+        `https://api.themoviedb.org/3/search/movie?query=${inputText}&api_key=${Constants.API_KEY}`
       )
         .then((res) => res.json())
         .then(
