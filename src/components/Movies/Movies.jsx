@@ -1,6 +1,8 @@
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useState } from "react";
 import { Link } from "react-router-dom";
 import Movie from "../Movie/Movie";
+import useFetch from "../../fetch-hook";
+
 const apiKey = "f9e6afddb568c3eac19893218b578cea";
 const path = "https://api.themoviedb.org/3/";
 const popular = "discover/movie?sort_by=popularity.desc";
@@ -12,64 +14,18 @@ const theathers =
 const authentication = "&api_key=";
 
 export const Movies = () => {
-  const [popularMovie, setPopular] = useState(null);
-  const [theartherMovie, setTheather] = useState(null);
-  const [kidsMovie, setKids] = useState(null);
-  const [dramaMovie, setDrama] = useState(null);
-
   const [searchedMovie, setsearchedMovie] = useState(null);
   const [isSearched, setIsSearchede] = useState(true);
   const [inputText, setInputText] = useState("");
 
-  useEffect(() => {
-    getPopular();
-    getTheather();
-    getKids();
-    getDrama();
-  }, []);
-
-  const getPopular = async () => {
-    let res = await fetch(`${path}${popular}${authentication}${apiKey}`);
-    let data = await res.json();
-    setPopular(data);
-    console.log(data.results);
-  };
-
-  const getTheather = () => {
-    fetch(`${path}${theathers}${authentication}${apiKey}`)
-      .then((res) => res.json())
-      .then(
-        (data) => {
-          setTheather(data);
-          console.log(data.results);
-        },
-        (err) => console.log(err)
-      );
-  };
-
-  const getKids = () => {
-    fetch(`${path}${kids}${authentication}${apiKey}`)
-      .then((res) => res.json())
-      .then(
-        (data) => {
-          setKids(data);
-          console.log(data.results);
-        },
-        (err) => console.log(err)
-      );
-  };
-
-  const getDrama = () => {
-    fetch(`${path}${drama}${authentication}${apiKey}`)
-      .then((res) => res.json())
-      .then(
-        (data) => {
-          setDrama(data);
-          console.log(data.results);
-        },
-        (err) => console.log(err)
-      );
-  };
+  const [popularMovie] = useFetch(
+    `${path}${popular}${authentication}${apiKey}`
+  );
+  const [theartherMovie] = useFetch(
+    `${path}${theathers}${authentication}${apiKey}`
+  );
+  const [kidsMovie] = useFetch(`${path}${kids}${authentication}${apiKey}`);
+  const [dramaMovie] = useFetch(`${path}${drama}${authentication}${apiKey}`);
 
   const findMovie = (e) => {
     e.preventDefault();
@@ -207,9 +163,9 @@ export const Movies = () => {
       </div>
 
       <div className="footer-copyright text-center">
-        <a className="footer" href="#">
+        <Link className="footer" to={"/"}>
           Popular Movies
-        </a>
+        </Link>
       </div>
     </Fragment>
   );
